@@ -2,6 +2,7 @@
   "name": "prm-ng",
   "version": "1.0.0",
   "description": "Supersimple Personal Relationship Manager - AI-powered relationship management Chrome extension",
+  "license": "MIT",
   "scripts": {
     "build": "npm run build:offscreen && npm run build:extension",
     "build:offscreen": "vite build --config vite.offscreen.config.js",

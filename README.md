@@ -63,3 +63,7 @@ docs/adr/           architecture decisions
 map/                edit map (objects and processes)
 assets/logo.png     app logo
 ```
+
+## License
+
+[MIT](LICENSE) © 2026 Supersimple
