@@ -1,0 +1,20 @@
+---
+description: Always commit and tag after each prompt's work
+alwaysApply: true
+---
+
+# Git Commit + Tag After Each Prompt
+
+After completing work for a user prompt (including any required version bump and build), you MUST:
+
+1. **Stage changes** with `git add -A`.
+2. **Create a commit** that describes the work done for that prompt.
+3. **Determine the current extension version** from the source (after running `python update-version.py ...`).
+4. **Create a Git tag whose name matches that version string** (for example, `1.0.26`).
+
+Additional notes:
+
+- Do not push by default; only push if the user explicitly asks.
+- Never skip the version bump + build rules defined elsewhere in this project.
+- Only create a commit and tag if there are actual changes to commit.
+

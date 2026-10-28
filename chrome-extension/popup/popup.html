@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supersimple Personal Relationship Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup">
+    <header class="popup-header">
+      <h1><img class="logo" src="../icons/icon48.png" alt="" width="28" height="28">Supersimple Personal Relationship Manager</h1>
+    </header>
+    <section class="sync-status">
+      <div class="status-row">
+        <span class="label">Last sync:</span>
+        <span id="lastSync">Never</span>
+      </div>
+      <div class="platforms">
+        <span id="linkedinStatus" class="platform-badge" title="LinkedIn"><span id="linkedinLoginDot" class="login-dot" title="Checking login…"></span>LinkedIn</span>
+        <span id="facebookStatus" class="platform-badge" title="Facebook"><span id="facebookLoginDot" class="login-dot" title="Checking login…"></span>Facebook</span>
+        <span id="whatsappStatus" class="platform-badge" title="WhatsApp"><span id="whatsappLoginDot" class="login-dot" title="Checking login…"></span>WhatsApp</span>
+        <span id="gmailStatus" class="platform-badge" title="Gmail"><span id="gmailLoginDot" class="login-dot" title="Checking login…"></span>Gmail</span>
+      </div>
+      <div class="login-dot-hint">● login status — hover a network for details</div>
+      <div id="errorMsg" class="error-msg hidden"></div>
+      <button id="syncBtn" class="btn btn-primary">Sync Now</button>
+    </section>
+    <section class="quick-search">
+      <input type="search" id="searchInput" placeholder="Search contacts..." />
+    </section>
+    <section class="recent" id="recentSection">
+      <h3>Recent <span id="contactTotalCount" class="contact-total-count" title="Total contacts"></span></h3>
+      <ul id="recentList"></ul>
+    </section>
+    <footer class="popup-footer">
+      <button type="button" id="openContacts" class="btn btn-secondary">Open Contacts</button>
+      <span id="version" class="version">v1.85.0 alpha</span>
+    </footer>
+  </div>
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

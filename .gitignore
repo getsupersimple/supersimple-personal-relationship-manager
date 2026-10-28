@@ -1,0 +1,32 @@
+# macOS Finder metadata (never commit)
+.DS_Store
+
+# Cursor debug NDJSON (local only)
+.cursor/debug-*.log
+
+# Local HTML dumps / debug
+john.html
+john_basic.html
+john2.html
+john3.html
+john4.html
+
+# Packed extension releases (contains the private signing key — never commit)
+release/
+
+# Python bytecode cache
+__pycache__/
+
+# Never commit exported contact data or page dumps
+WhatsApp.html
+*.csv
+.cursor/*.csv
+
+# Dependencies (npm install)
+node_modules/
+
+# Local agent settings
+.claude/
+
+# Captured Messenger page dump (session data); never commit
+chrome-extension/offscreen/messages.html

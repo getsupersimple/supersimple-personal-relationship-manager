@@ -1,0 +1,28 @@
+{
+  "_doc": "Known deviations frozen on 2026-10-27. verify.mjs fails on anything NOT listed here. Shrink these lists as issues in .scratch/ are fixed; never add to them without an ADR or invariant note.",
+  "tabs": [
+    "lib/gmail-message-tab-scrape.js:tabs.update",
+    "lib/google-contacts-tab-scrape.js:tabs.create",
+    "lib/google-contacts-tab-scrape.js:tabs.update",
+    "lib/tab-scraper-utils.js:tabs.create",
+    "lib/tab-scraper-utils.js:tabs.update",
+    "popup/popup.js:tabs.create",
+    "popup/popup.js:tabs.update"
+  ],
+  "hostAllowlist": [
+    "linkedin.com",
+    "facebook.com",
+    "fbcdn.net",
+    "whatsapp.com",
+    "google.com",
+    "gmail.com",
+    "huggingface.co",
+    "hf.co",
+    "raw.githubusercontent.com",
+    "w3.org"
+  ],
+  "network": [
+    "csp http://*:*",
+    "manifest host http://*/*"
+  ]
+}

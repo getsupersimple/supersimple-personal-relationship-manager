@@ -1,0 +1,47 @@
+---
+description: Version management - ALWAYS bump version after making edits
+alwaysApply: true
+---
+
+# Version Management
+
+**REQUIRED**: When you make any code changes to this project, you MUST:
+
+1. Run the version update script
+2. Run the build (Chrome loads from `dist/`, which is only updated by `npm run build`)
+3. **Git commit + tag each release** (after steps 1–2, if `git rev-parse --is-inside-work-tree` prints `true` and there are changes to record)
+
+```bash
+# For bug fixes (default for most changes)
+python update-version.py bugfix
+
+# For new features
+python update-version.py minor
+
+# For major/breaking changes (only when prompted)
+python update-version.py major
+
+# Set specific version
+python update-version.py set 1.3.5 "description"
+
+# Then rebuild (required—dist/ is what Chrome loads)
+npm run build
+```
+
+### Git commit + tag (each release)
+
+After the version bump and build, finish the release in git:
+
+1. Confirm repo: `git rev-parse --is-inside-work-tree` → must be `true`.
+2. Read the new version from `chrome-extension/manifest.json` (`"version"` field).
+3. `git add -A`
+4. `git commit -m "chore: release X.Y.Z"` (or a clearer message that includes the version / change summary).
+5. **Annotated tag** matching the manifest version exactly:  
+   `git tag -a X.Y.Z -m "X.Y.Z"`  
+   Tag format: `X.Y.Z` only (no `v` prefix), same string as `manifest.json` version.
+
+Skip commit/tag only if there is nothing to commit. **Do not `git push`** unless the user explicitly asks.
+
+The version script updates: `manifest.json`, `popup.html`, `rolodex.html`, `background/sw.js`, and adds an entry to `TASKS.md`.
+
+Version format: `Major.Minor.Bugfix` (e.g. 1.0.1). No leading zeros.

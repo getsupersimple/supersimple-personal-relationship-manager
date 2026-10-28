@@ -1,0 +1,13 @@
+---
+description: Avoid opening or activating tabs whenever possible
+alwaysApply: true
+---
+
+# Avoid Opening or Activating Tabs
+
+Source of truth: `AGENTS.md` ("Avoid Opening or Activating Tabs"). Summary:
+
+- Avoid opening or activating tabs whenever possible; prefer service worker `fetch`, offscreen documents, and content scripts in user-opened pages.
+- Do not change the URL of a tab the user opened.
+- If unavoidable: inactive tab, closed when done, via `withBackgroundTab` in `chrome-extension/lib/tab-scraper-utils.js`. Never `active: true` for new work.
+- Existing call sites are baselined in `harness/invariants.md` (I1).

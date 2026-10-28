@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=800, minimum-scale=1">
+  <title>Supersimple Personal Relationship Manager</title>
+  <link rel="stylesheet" href="contacts.css">
+</head>
+<body>
+      <div class="app">
+    <header class="header">
+      <h1><img class="logo" src="../icons/icon48.png" alt="" width="28" height="28">Supersimple Personal Relationship Manager</h1>
+      <nav>
+        <a href="contacts.html" class="nav-link active">Contacts</a>
+        <a href="ask-ai.html" class="nav-link">Ask AI</a>
+        <a href="settings.html" class="nav-link">Settings</a>
+      </nav>
+    </header>
+    <main class="main">
+      <aside class="sidebar">
+        <div class="search-box">
+          <input type="search" id="searchInput" placeholder="Search contacts..." />
+        </div>
+        <div class="filter-collapsible">
+          <button type="button" id="filterToggle" class="filter-toggle" aria-expanded="false" aria-controls="filterContent">
+            <span class="filter-toggle-icon">+</span> Filter
+          </button>
+          <div id="filterContent" class="filter-content" hidden>
+            <div class="filter-section">
+              <div class="filter-section-label">Social networks</div>
+              <div class="filter-checkboxes">
+                <label><input type="checkbox" id="filterLinkedIn" checked /> LinkedIn <span id="countLinkedIn" class="network-count">(0)</span></label>
+                <label><input type="checkbox" id="filterFacebook" checked /> Facebook <span id="countFacebook" class="network-count">(0)</span></label>
+                <label><input type="checkbox" id="filterWhatsApp" checked /> WhatsApp <span id="countWhatsApp" class="network-count">(0)</span></label>
+                <label><input type="checkbox" id="filterGmail" checked /> Gmail <span id="countGmail" class="network-count">(0)</span></label>
+              </div>
+            </div>
+            <div class="filter-section">
+              <label for="sortOrder" class="filter-section-label">Sort order</label>
+              <select id="sortOrder" class="filter-sort-select">
+                <option value="alphabetical">Alphabetical</option>
+                <option value="last-accessed">Last accessed</option>
+                <option value="most-accessed">Most accessed (past month)</option>
+                <option value="common-connections">Common connections</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="contact-list-container">
+          <ul id="contactList" class="contact-list"></ul>
+        </div>
+      </aside>
+      <section class="detail" id="detailPanel">
+        <div id="detailEmpty" class="detail-empty">
+          Select a contact or search
+        </div>
+        <div id="detailContent" class="detail-content hidden">
+          <div class="detail-header">
+            <h2 id="detailName"></h2>
+            <div class="detail-header-actions">
+              <div class="platform-tags" id="detailPlatforms"></div>
+              <div class="merge-control">
+                <button type="button" id="mergeContactBtn" class="btn btn-secondary merge-btn hidden" title="Merge another contact into this one">+ Merge contact</button>
+                <div id="mergeSearchWrap" class="merge-search-wrap hidden">
+                  <input type="text" id="mergeSearchInput" placeholder="Search by name..." />
+                  <ul id="mergeSearchResults" class="merge-search-results"></ul>
+                </div>
+              </div>
+            </div>
+            <div id="detailLinkedInUrl" class="linkedin-url hidden"></div>
+            <div id="detailFacebookUrl" class="linkedin-url hidden"></div>
+            <div id="detailWhatsAppUrl" class="linkedin-url hidden"></div>
+          </div>
+          <div class="factoids-section">
+            <h3>Factoids</h3>
+            <div id="detailFactoids" class="factoids-list"></div>
+            <div class="add-factoid-nl" id="factoidAiSection">
+              <div class="add-factoid-nl-row">
+                <input type="text" id="factoidNaturalLanguage" placeholder="e.g. “Moved to Turkey with his wife Linda”" aria-label="Add factoid from description" />
+                <select id="factoidModelSelect" class="factoid-model-select" aria-label="Model"></select>
+                <button type="button" id="factoidParseBtn" class="ask-ai-send-btn" aria-label="Parse with AI">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="add-factoid-form hidden" id="factoidManualSection">
+              <input type="text" id="factoidKey" placeholder="Key (e.g. role, location)" />
+              <input type="text" id="factoidValue" placeholder="Value" />
+              <input type="text" id="factoidSource" placeholder="Source (optional)" />
+              <button type="button" id="factoidAddBtn" class="btn btn-primary">Add factoid</button>
+            </div>
+            <div class="factoid-add-footer">
+              <span id="factoidParseStatus" class="factoid-status" aria-live="polite"></span>
+              <a href="#" id="factoidModeToggle" class="factoid-mode-toggle">Add manually</a>
+            </div>
+          </div>
+          <div class="latest-messages-section hidden" id="latestMessagesSection">
+            <div class="latest-messages-header">
+              <h3>Latest messages</h3>
+              <button type="button" id="refreshLatestMessagesBtn" class="btn btn-secondary btn-small">Refresh now</button>
+            </div>
+            <div id="latestMessagesContent">
+              <article id="latestGmailMessage" class="latest-message-card hidden" data-platform="gmail" aria-label="Latest Gmail message">
+                <div class="latest-message-network"></div>
+                <div class="latest-message-body"></div>
+                <div class="latest-message-source-block hidden">
+                  <div class="latest-message-source-header">
+                    <button type="button" class="latest-message-source-toggle" aria-expanded="false">Details</button>
+                  </div>
+                  <div class="latest-message-source-details hidden">
+                    <div class="latest-message-source-text"></div>
+                    <a class="latest-message-source-url hidden" href="#" target="_blank" rel="noopener"></a>
+                    <pre class="latest-message-source-debug hidden"></pre>
+                  </div>
+                </div>
+              </article>
+              <article id="latestLinkedInMessage" class="latest-message-card hidden" data-platform="linkedin" aria-label="Latest LinkedIn message">
+                <div class="latest-message-network"></div>
+                <div class="latest-message-body"></div>
+                <div class="latest-message-source-block hidden">
+                  <div class="latest-message-source-header">
+                    <button type="button" class="latest-message-source-toggle" aria-expanded="false">Details</button>
+                  </div>
+                  <div class="latest-message-source-details hidden">
+                    <div class="latest-message-source-text"></div>
+                    <a class="latest-message-source-url hidden" href="#" target="_blank" rel="noopener"></a>
+                    <pre class="latest-message-source-debug hidden"></pre>
+                  </div>
+                </div>
+              </article>
+              <article id="latestFacebookMessage" class="latest-message-card hidden" data-platform="facebook" aria-label="Latest Facebook message">
+                <div class="latest-message-network"></div>
+                <div class="latest-message-body"></div>
+                <div class="latest-message-source-block hidden">
+                  <div class="latest-message-source-header">
+                    <button type="button" class="latest-message-source-toggle" aria-expanded="false">Details</button>
+                  </div>
+                  <div class="latest-message-source-details hidden">
+                    <div class="latest-message-source-text"></div>
+                    <a class="latest-message-source-url hidden" href="#" target="_blank" rel="noopener"></a>
+                    <pre class="latest-message-source-debug hidden"></pre>
+                  </div>
+                </div>
+              </article>
+              <article id="latestWhatsAppMessage" class="latest-message-card hidden" data-platform="whatsapp" aria-label="Latest WhatsApp message">
+                <div class="latest-message-network"></div>
+                <div class="latest-message-body"></div>
+                <div class="latest-message-source-block hidden">
+                  <div class="latest-message-source-header">
+                    <button type="button" class="latest-message-source-toggle" aria-expanded="false">Details</button>
+                  </div>
+                  <div class="latest-message-source-details hidden">
+                    <div class="latest-message-source-text"></div>
+                    <a class="latest-message-source-url hidden" href="#" target="_blank" rel="noopener"></a>
+                    <pre class="latest-message-source-debug hidden"></pre>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"><span id="version">v1.85.0 alpha</span></footer>
+  </div>
+  <div id="modelDownloadBanner" class="model-download-banner hidden">
+    <span id="modelDownloadText" class="model-download-text"></span>
+    <div class="model-download-track"><div id="modelDownloadFill" class="model-download-fill"></div></div>
+    <span id="modelDownloadPercent" class="model-download-percent"></span>
+  </div>
+  <script src="contacts.js" type="module"></script>
+</body>
+</html>

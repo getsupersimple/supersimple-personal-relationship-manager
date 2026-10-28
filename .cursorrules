@@ -1,0 +1,16 @@
+# Version bump + build required
+After ANY code change: python update-version.py bugfix (or minor), then npm run build. Chrome loads from dist/.
+
+# Avoid opening or activating tabs
+Avoid opening or activating tabs whenever possible; prefer background fetch / offscreen / content scripts in user-opened pages. Don't change URLs of user tabs. If unavoidable: inactive tab, closed when done, via withBackgroundTab (lib/tab-scraper-utils.js). See AGENTS.md and harness/invariants.md (I1).
+
+# Git repo + mandatory commit/tag each release
+Verify at start: git rev-parse --is-inside-work-tree (expect true).
+
+After version bump + build (each release):
+1) Read version from chrome-extension/manifest.json "version"
+2) git add -A
+3) git commit (e.g. chore: release X.Y.Z)
+4) git tag -a X.Y.Z -m "X.Y.Z" — tag = manifest version, no v prefix
+
+Only commit/tag if there are changes. Never push unless the user explicitly asks.

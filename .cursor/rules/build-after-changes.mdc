@@ -1,0 +1,23 @@
+---
+description: Run build and version bump after making changes to the extension
+alwaysApply: true
+---
+
+# Build After Changes
+
+After editing any extension-related files (chrome-extension/, vite configs, manifest, etc.):
+
+1. **Bump version** (bugfix for fixes, minor for features):
+   ```bash
+   python update-version.py bugfix
+   # or: python update-version.py minor
+   ```
+
+2. **Build** (required after version bump—Chrome loads from `dist/`):
+   ```bash
+   npm run build
+   ```
+
+3. **Git commit + annotated tag** for that release (see **version-management** rule): `git add -A`, commit with version in the message, `git tag -a X.Y.Z -m "X.Y.Z"` using `manifest.json` `"version"`. Do not push unless the user asks.
+
+Never skip the build. The version script only updates source files; `dist/` is updated only by `npm run build`. Without rebuilding, Chrome will show the old version.

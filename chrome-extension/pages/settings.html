@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=800, minimum-scale=1">
+  <title>Settings - Supersimple Personal Relationship Manager</title>
+  <link rel="stylesheet" href="contacts.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1><img class="logo" src="../icons/icon48.png" alt="" width="28" height="28">Supersimple Personal Relationship Manager</h1>
+      <nav>
+        <a href="contacts.html" class="nav-link">Contacts</a>
+        <a href="ask-ai.html" class="nav-link">Ask AI</a>
+        <a href="settings.html" class="nav-link active">Settings</a>
+      </nav>
+    </header>
+    <main class="main">
+      <div class="settings-form">
+        <h2 class="settings-section-title">Your profile</h2>
+        <div class="form-group">
+          <label for="userName">Your name</label>
+          <input type="text" id="userName" placeholder="e.g. John Doe" autocomplete="off" />
+          <div class="hint">Used so message summaries refer to you as "you" instead of your name (e.g. "You missed a meeting" instead of "John missed a meeting").</div>
+        </div>
+        <h2>Social networks</h2>
+        <p class="hint settings-social-intro">Choose which networks to sync when you click Sync. Disabled networks are skipped — a network you're not logged into can't be enabled until you sign in.</p>
+        <div class="settings-networks-card">
+          <div class="network-row">
+            <label class="network-toggle">
+              <input type="checkbox" id="syncLinkedInEnabled" class="toggle-switch-input" checked />
+              <span class="toggle-switch"></span>
+              <span class="network-name">LinkedIn</span>
+              <span class="network-login-note hidden" id="linkedInLoginNote">Not logged in</span>
+            </label>
+            <div class="network-row-actions">
+              <a href="#" id="exportLinkedInCsv" class="network-action-link">Export</a>
+              <div class="network-menu">
+                <button type="button" class="network-menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="More actions for LinkedIn">⋮</button>
+                <div class="network-menu-dropdown hidden">
+                  <a href="#" id="importLinkedInCsv" class="network-menu-item">Import CSV</a>
+                  <a href="#" id="clearLinkedInContacts" class="network-menu-item network-menu-item-danger">Clear DB</a>
+                </div>
+              </div>
+              <input type="file" id="importLinkedInFile" class="settings-csv-file-input" accept=".csv,text/csv" />
+            </div>
+          </div>
+          <div class="network-row">
+            <label class="network-toggle">
+              <input type="checkbox" id="syncFacebookEnabled" class="toggle-switch-input" checked />
+              <span class="toggle-switch"></span>
+              <span class="network-name">Facebook</span>
+              <span class="network-login-note hidden" id="facebookLoginNote">Not logged in</span>
+            </label>
+            <div class="network-row-actions">
+              <a href="#" id="exportFacebookCsv" class="network-action-link">Export</a>
+              <div class="network-menu">
+                <button type="button" class="network-menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="More actions for Facebook">⋮</button>
+                <div class="network-menu-dropdown hidden">
+                  <a href="#" id="importFacebookCsv" class="network-menu-item">Import CSV</a>
+                  <a href="#" id="clearFacebookContacts" class="network-menu-item network-menu-item-danger">Clear DB</a>
+                </div>
+              </div>
+              <input type="file" id="importFacebookFile" class="settings-csv-file-input" accept=".csv,text/csv" />
+            </div>
+          </div>
+          <div class="network-row">
+            <label class="network-toggle">
+              <input type="checkbox" id="syncWhatsAppEnabled" class="toggle-switch-input" checked />
+              <span class="toggle-switch"></span>
+              <span class="network-name">WhatsApp</span>
+              <span class="network-login-note hidden" id="whatsAppLoginNote">Not logged in</span>
+            </label>
+            <div class="network-row-actions">
+              <a href="#" id="exportWhatsAppCsv" class="network-action-link">Export</a>
+              <div class="network-menu">
+                <button type="button" class="network-menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="More actions for WhatsApp">⋮</button>
+                <div class="network-menu-dropdown hidden">
+                  <a href="#" id="importWhatsAppCsv" class="network-menu-item">Import CSV</a>
+                  <a href="#" id="clearWhatsAppContacts" class="network-menu-item network-menu-item-danger">Clear DB</a>
+                </div>
+              </div>
+              <input type="file" id="importWhatsAppFile" class="settings-csv-file-input" accept=".csv,text/csv" />
+            </div>
+          </div>
+          <div class="network-row">
+            <label class="network-toggle">
+              <input type="checkbox" id="syncGmailEnabled" class="toggle-switch-input" checked />
+              <span class="toggle-switch"></span>
+              <span class="network-name">Gmail (Google Contacts)</span>
+              <span class="network-login-note hidden" id="gmailLoginNote">Not logged in</span>
+            </label>
+            <div class="network-row-actions">
+              <a href="#" id="exportGmailCsv" class="network-action-link">Export</a>
+              <div class="network-menu">
+                <button type="button" class="network-menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="More actions for Gmail">⋮</button>
+                <div class="network-menu-dropdown hidden">
+                  <a href="#" id="importGmailCsv" class="network-menu-item">Import CSV</a>
+                  <a href="#" id="clearGmailContacts" class="network-menu-item network-menu-item-danger">Clear DB</a>
+                </div>
+              </div>
+              <input type="file" id="importGmailFile" class="settings-csv-file-input" accept=".csv,text/csv" />
+            </div>
+          </div>
+        </div>
+        <div class="settings-all-contacts-card">
+          <div class="settings-all-contacts-header">Backup &amp; restore notes (recommended)</div>
+          <div class="settings-all-contacts-actions">
+            <a href="#" id="exportFactoidsCsv" class="network-action-link">Export factoids CSV</a>
+            <a href="#" id="importFactoidsCsv" class="network-action-link">Import factoids CSV</a>
+            <input type="file" id="importFactoidsFile" class="settings-csv-file-input" accept=".csv,text/csv" />
+          </div>
+          <div class="hint">Backs up just the notes you've added for each contact, not the contacts themselves. To restore from scratch: sync your networks again, then import this file to reattach your notes to the resynced contacts.</div>
+        </div>
+        <div class="settings-all-contacts-card">
+          <div class="settings-all-contacts-header">All contacts (every network)</div>
+          <div class="settings-all-contacts-actions">
+            <a href="#" id="exportAllCsv" class="network-action-link">Export CSV</a>
+            <a href="#" id="importAllCsv" class="network-action-link">Import CSV</a>
+            <input type="file" id="importAllFile" class="settings-csv-file-input" accept=".csv,text/csv" />
+            <button type="button" id="clearAllContacts" class="btn-danger">Clear all data</button>
+          </div>
+          <div class="hint">Full raw backup of every contact, platform, and note — larger file, mainly useful if you don't want to resync. Applies across LinkedIn, Facebook, WhatsApp, and Gmail at once.</div>
+        </div>
+        <h2 class="settings-section-title">WebLLM (Contact Extraction)</h2>
+        <div class="form-group">
+          <label for="webllmModel">Model</label>
+          <select id="webllmModel"></select>
+          <div class="hint">Smaller models are faster; 7B gives better quality. First use downloads the model (e.g. ~1GB for 1.5B, ~4GB for 7B). Or choose Local LLM to use your own OpenAI-compatible server (including OpenAI, by entering its URL).</div>
+          <div class="hint" id="providerNotice" style="display: none;"></div>
+        </div>
+        <div id="localLlmGroup" style="display: none;">
+          <div class="form-group">
+            <label for="localLlmBaseUrl">Local LLM base URL</label>
+            <input type="text" id="localLlmBaseUrl" placeholder="http://localhost:11434/v1" autocomplete="off" />
+            <div class="hint">Base URL of your local OpenAI-compatible server (e.g. Ollama, LM Studio, llama.cpp, vLLM). Requests are sent to <code>&lt;base URL&gt;/chat/completions</code>.</div>
+          </div>
+          <div class="form-group">
+            <label for="localLlmModel">Local LLM model name</label>
+            <input type="text" id="localLlmModel" placeholder="llama3.1" autocomplete="off" />
+            <div class="hint">The model identifier your local server expects (e.g. from <code>ollama list</code>).</div>
+          </div>
+          <div class="form-group">
+            <label for="localLlmApiKey">Local LLM API key (optional)</label>
+            <input type="password" id="localLlmApiKey" placeholder="Leave blank if not required" autocomplete="off" />
+            <div class="hint">Only needed if your local server requires an API key/token.</div>
+          </div>
+        </div>
+        <h2 class="settings-section-title">Conversations</h2>
+        <div class="form-group">
+          <label for="conversationRefreshMinutes">Conversation refresh interval (minutes)</label>
+          <input type="number" id="conversationRefreshMinutes" min="0" placeholder="0 = always refresh" />
+          <div class="hint">Skip re-fetching a contact's conversations (Gmail, LinkedIn, Facebook, WhatsApp) if they were already fetched within this many minutes. Use 0 to always refresh when a contact is opened.</div>
+        </div>
+        <div class="form-group">
+          <label for="recentMessagesLimit">Recent messages to fetch</label>
+          <input type="number" id="recentMessagesLimit" min="1" max="25" placeholder="5" />
+          <div class="hint">How many of the latest messages to fetch per contact (Gmail, LinkedIn, Facebook, WhatsApp) when loading or summarizing a conversation. 1-25, default 5.</div>
+        </div>
+        <h2 class="settings-section-title">Debug</h2>
+        <div class="form-group">
+          <label for="importLimit">Import limit</label>
+          <input type="number" id="importLimit" min="0" placeholder="0 = no limit" />
+          <div class="hint">Max contacts to import per sync. Use 0 for no limit. Useful for testing.</div>
+        </div>
+        <div class="form-group">
+          <label for="paginationDelayMs">Delay between page requests (ms)</label>
+          <input type="number" id="paginationDelayMs" min="250" placeholder="1000" />
+          <div class="hint">Pause between page requests for every network (LinkedIn, Facebook, Google Contacts). Default 1000, minimum 250. Too-fast requests can get your account rate limited or banned, so smaller values are raised to 250 and 0 or blank means 1000. Increase this if you see rate limits.</div>
+        </div>
+        <p class="hint settings-autosave-hint">Changes save automatically.</p>
+        <p id="settingsSaveStatus" class="factoid-status" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+  </div>
+  <div id="modelDownloadBanner" class="model-download-banner hidden">
+    <span id="modelDownloadText" class="model-download-text"></span>
+    <div class="model-download-track"><div id="modelDownloadFill" class="model-download-fill"></div></div>
+    <span id="modelDownloadPercent" class="model-download-percent"></span>
+  </div>
+  <script src="settings.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "prm-ng",
+  "version": "1.0.0",
+  "description": "Supersimple Personal Relationship Manager - AI-powered relationship management Chrome extension",
+  "scripts": {
+    "build": "npm run build:offscreen && npm run build:extension",
+    "build:offscreen": "vite build --config vite.offscreen.config.js",
+    "build:extension": "vite build --config vite.extension.config.js && cp -r chrome-extension/pages dist/ && mkdir -p dist/lib dist/content && cp chrome-extension/lib/storage.js chrome-extension/lib/dedup.js chrome-extension/lib/linkedin-url.js chrome-extension/lib/facebook-profile-url.js chrome-extension/lib/network-contact-csv.js chrome-extension/lib/conversation-summary-display.js chrome-extension/lib/message-time.js chrome-extension/lib/format-recent-messages-for-summary.js chrome-extension/lib/contact-effective-ids.js chrome-extension/lib/login-status.js chrome-extension/lib/model-download-banner.js chrome-extension/lib/factoid-merge.js chrome-extension/lib/webllm-model-select.js chrome-extension/lib/model-ids.js chrome-extension/lib/pagination-delay.js chrome-extension/lib/contact-mention-resolver.js dist/lib/",
+    "dev": "vite build --config vite.extension.config.js --watch",
+    "generate-icons": "node scripts/generate-icons.js",
+    "verify": "node harness/checks/verify.mjs && npm test",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"harness/tests/*.test.mjs\""
+  },
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.84"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.3.0",
+    "fake-indexeddb": "^6.2.6",
+    "pngjs": "^7.0.0",
+    "vite": "^5.4.0"
+  },
+  "private": true
+}

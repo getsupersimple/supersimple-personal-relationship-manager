@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "Supersimple Personal Relationship Manager",
+  "version": "1.85.0",
+  "version_name": "1.85.0-alpha",
+  "description": "Aggregates contacts from LinkedIn, Facebook, WhatsApp, and Google Contacts into a unified, AI-powered relationship management system.",
+  "permissions": [
+    "storage",
+    "offscreen",
+    "cookies",
+    "scripting",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.facebook.com/*",
+    "https://facebook.com/*",
+    "https://*.fbcdn.net/*",
+    "https://web.whatsapp.com/*",
+    "https://mail.google.com/*",
+    "https://contacts.google.com/*",
+    "https://www.linkedin.com/*",
+    "https://*.linkedin.com/*",
+    "https://huggingface.co/*",
+    "https://cdn-lfs.huggingface.co/*",
+    "https://cdn-lfs-us-1.huggingface.co/*",
+    "https://cdn-lfs-us-1.hf.co/*",
+    "https://cas-bridge.xethub.hf.co/*",
+    "https://raw.githubusercontent.com/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; default-src 'self' data: blob:; connect-src 'self' data: blob: https://www.facebook.com https://facebook.com https://*.fbcdn.net https://www.linkedin.com https://*.linkedin.com https://huggingface.co https://cdn-lfs.huggingface.co https://cdn-lfs-us-1.huggingface.co https://cdn-lfs-us-1.hf.co https://cas-bridge.xethub.hf.co https://raw.githubusercontent.com http://*:* https://*:*"
+  },
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "resources": [
+        "offscreen/offscreen.html",
+        "offscreen/offscreen.js"
+      ],
+      "use_dynamic_url": false
+    }
+  ],
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
